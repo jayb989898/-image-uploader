@@ -1,69 +1,45 @@
-const express = require("express");
-
+const express = require('express');
+const multer = require('multer');
+const path = require("path");
 const app = express();
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
-const PORT = process.env.PORT || 4200;
 
-// ADD THIS
-var cors = require('cors');
-app.use(cors());
-
-const sendMail = async (data) => {
-    const from = process.env.FROM;
-    const to = process.env.TO;
-    const transporter = nodemailer.createTransport({
-        host: process.env.HOST,
-        port: process.env.PORTMAIL,
-        secure: process.env.SECURE, // true for 465, false for other ports
-        auth: {
-            user: process.env.USER,
-            pass: process.env.PASS,
-        },
-        secureConnection: false,
-        tls:{
-            ciphers: process.env.CIPHERS,
-        },
-        service: process.env.SERVICE
-    });
-    // send mail with defined transport object
-    const info = await transporter.sendMail({
-        from: from, // sender address
-        to: to, // list of receivers
-        subject: data.barcode, // subject line
-
-        //attachments
-        attachments: [
-            {
-                filename: "hurtig-img.jpg",
-                content: data.img,
-                encoding: "base64",
-            },
-        ],
-    });
-    // console.log(info);
-};
-
-//  app.get("/", (req, res)=> {
-
-//   res.status(200).json({message: "HELLO ALL"});
-//  })
-
-
-app.post("/upload", async (req, res) => {
-    try {
-        const body = req.body.data;
-        console.log("New mail incoming");
-        const data = {
-            barcode: body.barcode,
-            img: img,
-        };
-        await sendMail(data);
-        res.status(200).send("Request completed successfully :)");
-    } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'images/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, 'image' + '-' + Date.now() + '-' + file.originalname)
     }
 });
 
-app.listen(PORT, console.log("app listening at port " + PORT));
+const uploadFilter = function(req, file, cb) {
+    const ext = path.extname(file.originalname);
+    if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+        return cb(new Error())
+    }
+    return cb(null, true)
+}
+
+const upload = multer({
+    storage: storage,
+    fileFilter: uploadFilter
+    }).single('image');
+
+app.use('/', express.static('images'));
+
+app.post('/upload', function (req, res) {
+    upload(req, res, function (err) {
+        if(err) {
+            res.status(400).send("Formato immagine non supportato");
+        } else {
+            res.json({
+                success: 1,
+                image_url: 'http://localhost:4200/' + req.file.filename
+            })
+        }
+    });
+})
+
+app.listen(4200,() => {
+    console.log("App is listening on port 4200")
+});
