@@ -27,7 +27,7 @@ window.onload=function() {
 
             } else {
                 alert('errore non gestito ' + content);
-            };
+            }
         })();
     })
 }
