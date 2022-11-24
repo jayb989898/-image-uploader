@@ -1,3 +1,20 @@
-#my_image {
+.inputImage {
     display: none;
+}
+
+.drop-area {
+    height: 218.90283203125px;
+    width: 338px;
+    border-radius: 12px;
+    background: #F6F8FB;
+    border: 1px dashed #97BEF4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imgArea {
+    background: #BDBDBD;
+    border-radius: 12px;
 }
