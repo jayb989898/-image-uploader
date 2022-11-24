@@ -9,7 +9,7 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <div class="conatiner-fluid text-center">
+    <div class="conatiner-fluid text-center" id="startPage">
       <div class="row text-center mt-4">
         <h1>Upload your image</h1>
       </div>
@@ -31,6 +31,15 @@
         <div class="col-2">
           <button type="button" class="btn btn-primary" onclick="selectFile()">Choose a file</button>
           <input type="file" accept="image/*" id="my_image" class="inputImage">
+        </div>
+      </div>
+    </div>
+    <div class="conatiner-fluid text-center justify-content-center hide" id="endLoad">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
     </div>

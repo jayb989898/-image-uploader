@@ -24,6 +24,8 @@ window.onload=function() {
             if(content.success === 0) {
                 alert(content.error.toUpperCase());
             } else if(content.success === 1) {
+                document.getElementById("startPage").classList.add("hide");
+                document.getElementById("endLoad").classList.remove("hide");
 
             } else {
                 alert('errore non gestito ' + content);
