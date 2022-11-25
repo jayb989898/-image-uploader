@@ -2,8 +2,8 @@
     display: none;
 }
 .drag-area {
-    height: 218.90283203125px;
-    width: 338px;
+    height: 250px;
+    width: 350px;
     border-radius: 12px;
     background: #F6F8FB;
     border: 1px dashed #97BEF4;
@@ -30,9 +30,17 @@
     align-items: center;
     min-height: 90vh;
 }
+#startPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+#startCard{
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+}
 #loadingCard{
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
-
 }
 #endCard{
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
@@ -40,9 +48,6 @@
 .card {
     height: 450px;
     width: 450px;
-}
-.hide {
-    display: none;
 }
 .fa-circle-check {
     color: #219653;

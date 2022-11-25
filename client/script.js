@@ -4,6 +4,9 @@ function selectFile() {
 
 
 window.onload=function() {
+    document.getElementById('startPage').classList.add('hide');
+    document.getElementById('loadingPage').classList.add('hide');
+    document.getElementById('endPage').classList.add('hide');
     showStart();
     //drag Area
     const dragArea = document.getElementsByClassName('drag-area');
@@ -47,19 +50,19 @@ function fetchImage(data) {
 }
 
 function showStart(){
-    document.getElementById('startPage').classList.remove('hide');
-    document.getElementById('loadingPage').classList.add('hide');
-    document.getElementById('endPage').classList.add('hide');
+    document.getElementById('startPage').style.display = '';
+    document.getElementById('loadingPage').style.display = 'none';
+    document.getElementById('endPage').style.display = 'none';
 }
 function showLoading() {
-    document.getElementById('startPage').classList.add('hide');
-    document.getElementById('loadingPage').classList.remove('hide');
-    document.getElementById('endPage').classList.add('hide');
+    document.getElementById('startPage').style.display = 'none';
+    document.getElementById('loadingPage').style.display = '';
+    document.getElementById('endPage').style.display = 'none';
 }
 function showResult(urlImage) {
-    document.getElementById('startPage').classList.add('hide');
-    document.getElementById('loadingPage').classList.add('hide');
-    document.getElementById('endPage').classList.remove('hide');
+    document.getElementById('startPage').style.display = 'none';
+    document.getElementById('loadingPage').style.display = 'none';
+    document.getElementById('endPage').style.display = '';
     document.getElementById('imageUrl').value = urlImage.toString();
     document.getElementById('imagePreview').src = urlImage;
 }
