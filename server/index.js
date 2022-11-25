@@ -33,7 +33,6 @@ const upload = multer({
     fileFilter: uploadFilter
     }).single('image');
 
-
 app.post('/upload', function (req, res) {
     upload(req, res, function (err) {
         if(err) {
@@ -48,4 +47,4 @@ app.post('/upload', function (req, res) {
             })
         }
     });
-})
+});
